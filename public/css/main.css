@@ -1,0 +1,20 @@
+/* Clases Generales */
+.bg-teal{
+    background-color: #00897b;
+}
+.btn-teal{
+    background-color: #00897b;
+}
+.btn-teal:hover{
+    background-color: #006c7a;
+}
+.text-teal{
+    color: #00897b;
+}
+
+header nav ul li a{
+    border-top: 2px solid transparent;
+}
+header nav ul li a:hover{
+    border-top: 2px solid white;
+}
