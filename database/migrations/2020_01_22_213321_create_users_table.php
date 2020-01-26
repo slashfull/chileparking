@@ -18,11 +18,12 @@ class CreateUsersTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id');
+            $table->string('rut', 9)->unique()->nullable();
+            $table->string('name', 30);
+            $table->string('lastname', 30)->nullable();
+            $table->integer('phone')->nullable();
             $table->string('email', 50)->unique();
             $table->string('password');
-            
-            $table->bigInteger('person_id')->unsigned();
-            $table->foreign('person_id')->references('id')->on('persons');
             
             $table->bigInteger('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles');
