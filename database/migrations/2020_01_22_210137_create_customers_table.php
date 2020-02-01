@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->engine = 'innoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
-            $table->string('rut', 9)->index();
+            $table->string('rut', 12)->index();
             $table->string('name', 30);
             $table->string('lastname', 30)->nullable();
             $table->integer('phone')->nullable();

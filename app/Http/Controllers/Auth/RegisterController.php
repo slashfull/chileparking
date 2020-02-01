@@ -56,7 +56,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'rut' => ['required', 'string', 'max:12', 'unique:customers', new ValidChileanRut(new ChileRut)],
             'name' => ['required', 'string', 'max:30'],
-            'lastname' => ['required', 'string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
         ]);
@@ -72,15 +71,13 @@ class RegisterController extends Controller
     {
         Customer::create([
             'rut' => $data['rut'],
-            'name' => ucfirst( $data['name'] ),
-            'lastname' => ucfirst( $data['lastname'] ),
-            'phone' => $data['phone']
+            'name' => ucfirst( $data['name'] )
         ]);
         return User::create([
             'email' => $data['email'],
             'customer_rut' => $data['rut'],
             'password' => Hash::make($data['password']),
-            'role_id' => 1,
+            'role_id' => 3,
         ]);
     }
 }
