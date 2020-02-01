@@ -17,11 +17,10 @@ class CreateCustomersTable extends Migration
             $table->engine = 'innoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id');
-            $table->string('rut', 9)->unique();
+            $table->string('rut', 9)->index();
             $table->string('name', 30);
-            $table->string('lastname', 30);
-            $table->integer('phone');
+            $table->string('lastname', 30)->nullable();
+            $table->integer('phone')->nullable();
             $table->timestamps();
         });
     }

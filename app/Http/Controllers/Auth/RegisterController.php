@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
-use App\Persons;
+use App\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
+use Malahierba\ChileRut\ChileRut;
+use Malahierba\ChileRut\Rules\ValidChileanRut;
 
 class RegisterController extends Controller
 {
@@ -51,8 +54,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'rut' => ['required', 'string', 'max:12', 'unique:customers', new ValidChileanRut(new ChileRut)],
+            'name' => ['required', 'string', 'max:30'],
+            'lastname' => ['required', 'string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:5', 'confirmed'],
         ]);
     }
 
@@ -64,9 +70,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Customer::create([
+            'rut' => $data['rut'],
+            'name' => ucfirst( $data['name'] ),
+            'lastname' => ucfirst( $data['lastname'] ),
+            'phone' => $data['phone']
+        ]);
         return User::create([
             'email' => $data['email'],
+            'customer_rut' => $data['rut'],
             'password' => Hash::make($data['password']),
+            'role_id' => 1,
         ]);
     }
 }

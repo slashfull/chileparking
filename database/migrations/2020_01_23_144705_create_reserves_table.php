@@ -26,8 +26,8 @@ class CreateReservesTable extends Migration
             $table->bigInteger('space_id')->unsigned();
             $table->foreign('space_id')->references('id')->on('spaces');
             
-            $table->bigInteger('customer_id')->unsigned();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->string('customer_rut');
+            $table->foreign('customer_rut')->references('rut')->on('customers');
 
             $table->bigInteger('state_reserve_id')->unsigned();
             $table->foreign('state_reserve_id')->references('id')->on('state_reserves');
